@@ -61,7 +61,7 @@ Bem-vindo ao Ecommerce-Django, uma plataforma de comércio eletrônico desenvolv
     ```bash
   python manage.py runserver
   
-- Acesse o projeto em <a href="http://localhost:8000/"></a>
+- Acesse o projeto em [Link](http://localhost:8000/)
 
 ## 🤝 Contribuições
 
