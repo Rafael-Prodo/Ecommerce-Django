@@ -61,15 +61,19 @@ Bem-vindo ao Ecommerce-Django, uma plataforma de comércio eletrônico desenvolv
     ```bash
   python manage.py runserver
   
-- Acesse o projeto em [Link](http://localhost:8000/)
+- Acesse o projeto em [http://localhost:8000/]
+
+  
 
 ## 🤝 Contribuições
 
 - Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+  
 
 ## 📖 Referências
 
 - Este projeto foi inspirado pelo curso [@cursodetecnologiaeprogramação](https://www.youtube.com/@cursodetecnologiaeprogramação), com exemplos práticos alinhados ao mercado.
+  
 
 ## 📝 Licença
 
