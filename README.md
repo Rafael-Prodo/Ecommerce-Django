@@ -10,7 +10,7 @@ Bem-vindo ao Ecommerce-Django, uma plataforma de comércio eletrônico desenvolv
 - Autenticação de Usuários: Sistema de registro e login para clientes.
 - Painel Administrativo: Gerenciamento de produtos, pedidos e usuários.
 
-#🛠️ Tecnologias Utilizadas
+# 🛠️ Tecnologias Utilizadas
 
 - Linguagem: Python 3.7.3
 - Framework: Django 2.2.4
@@ -31,10 +31,46 @@ Bem-vindo ao Ecommerce-Django, uma plataforma de comércio eletrônico desenvolv
 
 # 🚀 Como Executar o Projeto
   
-- Clone o repositório: ```git clone https://github.com/Rafael-Prodo/Ecommerce-Django.git```
-- Navegue até o diretório do projeto: ```cd Ecommerce-Django```
-- Crie e ative um ambiente virtual: ```python -m venv venv source venv/bin/activate  # No Windows: venv\Scripts\activate.bat```
-- Instale as dependências: ```pip install -r requirements.txt```
-- Realize as migrações do banco de dados: ```python manage.py migrate```
-- Inicie o servidor de desenvolvimento: ```python manage.py runserver```
+- Clone o repositório:
+  
+  ```bash
+  git clone https://github.com/Rafael-Prodo/Ecommerce-Django.git
+
+- Navegue até o diretório do projeto:
+
+    ```bash
+  cd Ecommerce-Django
+  
+- Crie e ative um ambiente virtual: 
+
+  ```bash
+  python -m venv venv source venv/bin/activate # No Windows: venv\Scripts\activate.bat
+  
+- Instale as dependências:
+
+    ```bash
+  pip install -r requirements.txt
+  
+- Realize as migrações do banco de dados:
+
+    ```bash
+  python manage.py migrate
+  
+- Inicie o servidor de desenvolvimento:
+
+    ```bash
+  python manage.py runserver
+  
 - Acesse o projeto em <a href="http://localhost:8000/"></a>
+
+# 🤝 Contribuições
+
+- Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+
+# 📖 Referências
+
+- Este projeto foi inspirado pelo curso @cursodetecnologiaeprogramação, com exemplos práticos alinhados ao mercado.
+
+# 📝 Licença
+
+- Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
