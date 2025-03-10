@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+
+<style>
+    .errorlist{
+        color:red;
+        list-style: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mx-auto form-control" style="max-width: 400px;">
+            <br>
+            <h2 class="text-center">Entrar</h2>
+            <br>
+            <form style="width: 300px; margin: auto;" action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary btn-lg">Entrar</button>
+                {% if error %}
+                <br>
+                <br>
+                <li style="color: red; list-style: none;">{{error}}</li>
+
+                {% endif %}
+                
+            </form>
+            <br>
+            <p class="text-center">Clique aqui para se cadastrar! <a href="{% url 'ecommerceapp:clienteregistrar' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Clique aqui</a></p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

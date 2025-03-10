@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar Cliente{% endblock %}
+
+{% block content %}
+<style>
+    .errorlist{
+        color:red;
+        list-style: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto form-control" style="max-width: 400px;">
+            <br>
+            <h3 class="text-center">Registrar-se</h3>
+            <br>
+            <form style="width: 300px; margin: auto;" method="post" action="{% url 'ecommerceapp:clienteregistrar' %}">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-lg btn-primary mt-2" type="submit">Registre-se Aqui</button>
+
+            </form>
+            <br>
+            <p class="text-center">Ja tem uma conta? <a href="{% url 'ecommerceapp:clienteentrar' %}">Faça Login Aqui</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Processar{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+            <h3 class="text-center"><span class="badge bg-warning text-dark">Itens do Carrinho</span></h3>
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center table-light">Codigo</th>
+                        <th class="text-center table-light">Produto</th>
+                        <th class="text-center table-light">Categoria</th>
+                        <th class="text-center table-light">Quantidade</th>
+                        <th class="text-center table-light">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartitem_set.all %}
+                    <tr>
+                        <td class="text-center">{{forloop.counter}}</td>
+                        <td class="text-center">{{cp.produto.titulo}}</td>
+                        <td class="text-center">{{cp.produto.categoria}}</td>
+                        <td class="text-center">{{cp.quantidade}}</td>
+                        <td class="text-center">{{cp.subtotal}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tr>
+                    <th colspan="4" class="text-right">Valor Total: </th>
+                    <th class="text-center">R${{cart.total}}</th>
+                </tr>
+            </table>
+            <a href="{% url 'ecommerceapp:meucart' %}" class="btn btn-danger btn-lg">Atualizar Carrinho</a>
+            <br>
+            </th>
+            </table>
+        </div>
+        <div class="col-md-6 mx-auto form-control" style="max-width: 300px;">
+            <br>
+            <h3 class="text-center"><span class="badge bg-light text-dark ">Detalhes do Pedido</span></h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-sm btn-success">Finalizar Compra</button>
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

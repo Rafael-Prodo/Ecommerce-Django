@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{produto.titulo}}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <h1><span class="badge bg-warning text-dark">Produto: {{produto.titulo}}</h1></span>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{produto.imagem.url}}" alt="" class="img-fluid">
+        </div>
+        <div class="col-md-6" text-left>
+            <h3 class="text-white">{{produto.titulo}}</h3>
+            <h5><a href="{% url 'ecommerceapp:todosprodutos' %}">{{produto.categoria}}</a></h5>
+            <a href="{% url 'ecommerceapp:add-cart' produto.id %}" class="btn btn-danger btn-lg">Comprar</a>
+            <br>
+            <br>
+            <h4 class="d-inline p-2 bg-dark text-warning"><strike>R${{produto.preco_mercado}}</strike> R${{produto.venda}}</h4>
+            <br>
+            <br>
+            <label class="form-label font-weight-bold text-white" for="tamanho">Tamanhos:</label>
+            <select id="tamanho" class="form-select form-select-sm mb-2 w-25">
+                <option>Selecionar tamanho</option>
+            </select>
+            <p class="font-weight-bold text-white">Descriçãoo do Produto:</p>
+            <p class="font-weight-light text-white">{{produto.descricao}}</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

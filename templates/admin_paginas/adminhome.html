@@ -1,0 +1,42 @@
+{% extends 'admin_paginas/adminbase.html' %}
+
+<title>{% block title %}Administrador Home{% endblock %}</title>
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <h2 class="text-white bg-info text-center p-2 mt-3">Pedidos Recentes</h2>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th class="text-center table-light">Código</th>
+                            <th class="text-center table-light">ID Pedido</th>
+                            <th class="text-center table-light">Cliente</th>
+                            <th class="text-center table-light">Data Pedido</th>
+                            <th class="text-center table-light">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pedido in PedidosPendentes %}
+                        
+                        <tr>
+                            <td class="text-center">{{forloop.counter}}</td>
+
+                            <td class="text-center"><a href="{% url 'ecommerceapp:adminpedidodetalhe' pedido.id %}">{{pedido.id}}</a></td>
+                            <td class="text-center"><span class="badge bg-primary">{{pedido.ordenado_por}}</td></span>
+                            <td class="text-center"><span class="badge bg-light text-dark">{{pedido.criado_em}}</td></span>
+                            <td class="text-center"><span class="badge bg-success">{{pedido.total}}</td></span>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

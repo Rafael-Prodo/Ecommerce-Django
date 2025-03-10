@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Pesquisar{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h3><span class="badge bg-warning text-dark">Resultados da Pesquisa: <span class="text-success"></span>"{{ request.GET.keyword }}"</span></h3>
+            <br>
+            <div class="row">
+                {% for result in result %}
+                <div class="col-md-4 mb-3">
+                    <div class="card card" style="width: 18rem;">
+                        <img src="{{ result.imagem.url }}" class="card-img-top" alt="{{ result.titulo }}">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'ecommerceapp:produtodetalhe' result.slug %}">{{ result.titulo }}</a></h5>
+                            <p class="card-text">{{ result.descricao|truncatewords:20 }}</p>
+                            <p class="card-text">Política de devolução: {{ result.return_devolucao }}</p>
+                            <a href="{% url 'ecommerceapp:add-cart' result.id %}" class="btn btn-secondary btn-sm">Adicionar ao carrinho</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

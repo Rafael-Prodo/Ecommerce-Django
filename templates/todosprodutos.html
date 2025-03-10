@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}TODOS PRODUTOS{% endblock %}
+
+{% block content %}
+
+<style>
+    a {
+        text-decoration: none;
+    }
+    .card-body-custom {
+        background-color: #b1b1b1; /* Cor de fundo personalizada */
+        color: white; /* Cor do texto */
+    }
+</style>
+
+<div class="container">
+    <br>
+    <h1 class="text-center p-2 mt-3"><span class="badge bg-light text-dark">Produto por Categoria</h1></span>
+    <br>
+
+    {% for cat in todascategorias %}
+
+    <br>
+    <br>
+    <h1><span class="badge bg-warning text-dark">{{cat.titulo}}</span></h1>
+    <br>
+    <div class="row mt-3">
+        {% for p in cat.produto_set.all %}
+        <div class="col-md-4 mb-4">
+            <div class="card card" style="width: 18rem;">
+                <img src="{{p.imagem.url}}" alt="" class="card-img-top"
+                    style="width: 100%; height: 100%;">
+                <div class="card-body card-body-custom">
+                    <h4><a href="{% url 'ecommerceapp:produtodetalhe' p.slug %}">{{p.titulo}}</a></h4>
+                    <p class="card-text">Loja Master Sport's</p>
+                    <p class="mt-3 font-weight-bold">Preco: <strike>R${{p.preco_mercado}}</strike> R${{p.venda}}</p>
+                    <a href="{% url 'ecommerceapp:add-cart' p.id %}" class="btn btn-danger btn-sm">Comprar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

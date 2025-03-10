@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Detalhes do Pedido{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row justify-content-center">
+        <br>
+        <h1 class="text-white bg-info text-center p-2">Meu Perfil</h1>
+        <br>
+        <div class="col-md-3 card" style="width: 400px;">
+            <br>
+            <div class="card-body">
+                <h3 class="text-center"><span class="badge bg-light text-dark">Detalhes da Compra</span></h3>
+                <br>
+                <p><span class="card-text font-weight-bold">Pedido ID: </span>Pedido_{{pedido_obj.id}}</p>
+                <p><span class="card-text font-weight-bold">Status do Pedido: </span>{{pedido_obj.pedido_status}}</p>
+                <p><span class="card-text font-weight-bold">Data do Pedido: </span>{{pedido_obj.criado_em}}</p>
+                <p><span class="card-text font-weight-bold">Cliente: </span>{{pedido_obj.ordenado_por}}</p>
+            </div>
+        </div>
+        <div class="col-md-8 card ms-3" style="width: 68%;">
+            <br>
+            <h1 class="text-center"><span class="badge bg-light text-dark">Itens do Pedido</span></h1>
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center table-light">Código</th>
+                        <th class="text-center table-light">Item</th>
+                        <th class="text-center table-light">Categoria</th>
+                        <th class="text-center table-light">Produto ID</th>
+                        <th class="text-center table-light">Quantidade</th>
+                        <th class="text-center table-light">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in pedido_obj.cart.cartitem_set.all %}
+                    <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td class="text-center"><a target="_blank" href="{% url 'ecommerceapp:produtodetalhe' cp.produto.slug %}">{{ cp.produto.titulo }}</a></td>
+                        <td class="text-center"><span class="badge bg-light text-dark">{{ cp.produto.categoria }}</td></span>
+                        <td class="text-center">{{ cp.produto.id }}</td>
+                        <td class="text-center">{{ cp.quantidade }}</td>
+                        <td class="text-center"><span class="badge bg-success">{{ cp.subtotal }}</td></span>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="5" class="text-right table-info" style="text-align:right"> Valor Total:</th>
+                        <th class="text-right text-center table-info" style="text-align:right"> R$ {{ pedido_obj.total|intcomma }}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

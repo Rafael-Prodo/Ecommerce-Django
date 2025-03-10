@@ -1,0 +1,75 @@
+{% extends 'admin_paginas/adminbase.html' %}
+{% load humanize %}
+
+{% block title %}Detalhes do Pedido{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <h1 class="text-white bg-info text-center p-2">Administrar Pedido</h1>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="text-center"><span class="badge bg-light text-dark">Detalhes do Pedido</span></h3>
+                    <br>
+                    <p><span class="card-text font-weight-bold">Pedido ID:</span> Pedido_{{pedido_obj.id}}</p>
+                    <p><span class="card-text font-weight-bold">Status do Pedido:</span> {{pedido_obj.pedido_status}}</p>
+                    <p><span class="card-text font-weight-bold">Data do Pedido:</span> {{pedido_obj.criado_em}}</p>
+                    <p><span class="card-text font-weight-bold">Informação Cliente:</span> {{pedido_obj.ordenado_por}}</p>
+                    <p><span class="card-text font-weight-bold">Telefone:</span> {{pedido_obj.telefone}}</p>
+                    <p><span class="card-text font-weight-bold">Endereço:</span> {{pedido_obj.endereco_envio}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1 class="text-center"><span class="badge bg-light text-dark">Items do Pedido</span></h1>
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center table-light">Código</th>
+                                <th class="text-center table-light">Item</th>
+                                <th class="text-center table-light">Produto ID</th>
+                                <th class="text-center table-light">Avaliação</th>
+                                <th class="text-center table-light">Quantidade</th>
+                                <th class="text-center table-light">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cp in pedido_obj.cart.cartitem_set.all %}
+                            <tr>
+                                <td class="text-center">{{ forloop.counter }}</td>
+                                <td class="text-center"><a target="_blank" href="{% url 'ecommerceapp:produtodetalhe' cp.produto.slug %}">{{ cp.produto.titulo }}</a></td>
+                                <td class="text-center">{{ cp.produto.id }}</td>
+                                <td class="text-center">{{ cp.avaliacao }}</td>
+                                <td class="text-center">{{ cp.quantidade }}</td>
+                                <td class="text-center">{{ cp.subtotal }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <th colspan="5" class="text-right table-info" style="text-align:right"> Valor Total:</th>
+                                <th class="text-right table-info text-center" style="text-align:right"> R$ {{ pedido_obj.total|intcomma }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form action="{% url 'ecommerceapp:adminpedidomudar' pedido_obj.id %}" method="post" class="w-25">
+                        {% csrf_token %}
+                        <select name="status" class="form-select">
+                            {% for i, j in todosstatus %}
+                            <option value="{{ i }}" {% if pedido_obj.pedido_status == i %} selected {% endif %}>{{ j }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary mt-3">Confirmar</button>
+                            <a class="text-white btn btn-danger mt-3" href="{% url 'ecommerceapp:adminhome' %}">Atualizar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Meu Carrinho{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-mod-8">
+            <br>
+            <h2 class="text-white bg-dark text-center p-2">Itens do Carrinho</h2>
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">Codigo</th>
+                        <th class="text-center">Produto</th>
+                        <th class="text-center">Avaliacao</th>
+                        <th class="text-center">Quantidade</th>
+                        <th class="text-center">Subtotal</th>
+                        <th class="text-center table-secondary">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartitem_set.all %}
+                    <tr>
+                        <td class="text-center table-light">{{forloop.counter}}</td>
+                        <td class="text-center table-light">{{cp.produto.titulo}}</td>
+                        <td class="text-center table-light">{{cp.avaliacao}}</td>
+                        <td class="text-center table-light">{{cp.quantidade}}</td>
+                        <td class="text-center table-light">{{cp.subtotal}}</td>
+                        <td class="align-middle text-center table-secondary">
+                            <a href="{% url 'ecommerceapp:manipularcart' cp.id %}?acao=inc" class="btn btn-outline-primary"> adicionar
+                            </a>
+                            <a href="{% url 'ecommerceapp:manipularcart' cp.id %}?acao=dcr" class="btn btn-outline-warning"> remover
+                            </a>
+                            <a href="{% url 'ecommerceapp:manipularcart' cp.id %}?acao=rmv" class="btn btn-outline-danger"> deletar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text-right table-info">Total Carrinho: </th>
+                        <th class="table-info text-center">R${{cart.total}}</th>
+                        {% if cart.cartitem_set.all %}
+                        <th class="text-center table-secondary"><a href="{% url 'ecommerceapp:limparcart' %}"
+                                class="btn btn-secondary">Limpar
+                                Carrinho</a></th>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+            {% if cart.cartitem_set.all %}
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'ecommerceapp:checkout' %}" class="btn btn-success btn-lg">Finalizar Compra</a>
+                <a href="{% url 'ecommerceapp:home' %}" class="btn btn-danger btn-lg">Continuar Comprando</a>
+            </div>
+            {% endif %}
+            </tr>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

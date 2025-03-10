@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row justify-content-center">
+        <br>
+        <h1 class="text-white bg-info text-center p-2">Meu Perfil</h1>
+        <br>
+        <div class="col-md-3 card" style="width: 400px;">
+            <br>
+            <div class="card-body">
+                <h3 class="text-center"><span class="badge bg-light text-dark">Detalhes do Cliente</span></h3>
+                <br>
+                <p><span class="card-text font-weight-bold">Nome: </span>{{cliente.nome_completo}}</p>
+                <p><span class="card-text font-weight-bold">Usuario: </span>{{cliente.user.username}}</p>
+                <p><span class="card-text font-weight-bold">Email: </span>{{cliente.user.email}}</p>
+                <p><span class="card-text font-weight-bold">Endereço: </span>{{cliente.endereco}}</p>
+                <p><span class="card-text font-weight-bold">Cadastrado em: </span>{{cliente.data_on}}</p>
+                <br>
+                <a href="{% url 'ecommerceapp:meucart' %}" class="btn btn-danger">Acessar Carrinho</a>
+            </div>
+        </div>
+        <div class="col-md-8 card ms-3" style="width: 68%;">
+            <br>
+            <h1 class="text-center"><span class="badge bg-light text-dark ">Detalhes de Compras Anteriores</span></h1>
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center table-light">Pedido ID</th>
+                        <th class="text-center table-light">Valor</th>
+                        <th class="text-center table-light">Data Pedido</th>
+                        <th class="text-center table-light">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    {% if pedido.pedido_status != 'Pedido Cancelado' %}
+                    <tr>
+                        <td class="text-center"><a href="{% url 'ecommerceapp:clientepedidodetalhe' pedido.pk %}">{{pedido.id}}</a></td>
+                        <td class="text-center"><span class="badge bg-success">{{pedido.total}}</span></td>
+                        <td class="text-center"><span class="badge bg-light text-dark">{{pedido.criado_em}}</span></td>
+                        <td class="text-center">
+                            {% if pedido.pedido_status == 'Pedido Recebido' %}
+                            <span class="text-secondary">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido em Processo' %}
+                            <span class="text-info">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido Enviado' %}
+                            <span class="text-warning">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido Entregue' %}
+                            <span class="text-success">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido Cancelado' %}
+                            <span class="text-danger">{{ pedido.pedido_status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

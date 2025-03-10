@@ -1,0 +1,54 @@
+{% extends 'admin_paginas/adminbase.html' %}
+
+{% block title %}Todos os Pedidos{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2 class="text-white bg-info text-center p-2 mt-3">Todos os Pedidos</h2>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th class="text-center table-light">Código</th>
+                        <th class="text-center table-light">ID Pedido</th>
+                        <th class="text-center table-light">Cliente</th>
+                        <th class="text-center table-light">Data Pedido</th>
+                        <th class="text-center table-light">Valor</th>
+                        <th class="text-center table-light">Status Produto</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in todospedidos %}
+                    {% if pedido.pedido_status != 'Pedido Cancelado' %}
+                    <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td class="text-center"><a href="{% url 'ecommerceapp:adminpedidodetalhe' pedido.id %}">{{ pedido.id }}</a></td>
+                        <td class="text-center"><span class="badge bg-primary">{{ pedido.ordenado_por }}</span></td>
+                        <td class="text-center"><span class="badge bg-light text-dark">{{ pedido.criado_em }}</span></td>
+                        <td class="text-center"><span class="badge bg-success">{{ pedido.total }}</span></td>
+                        <td class="text-center">
+                            {% if pedido.pedido_status == 'Pedido Recebido' %}
+                            <span class="text-secondary">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido em Processo' %}
+                            <span class="text-info">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido Enviado' %}
+                            <span class="text-warning">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido Entregue' %}
+                            <span class="text-success">{{ pedido.pedido_status }}</span>
+                            {% elif pedido.pedido_status == 'Pedido Cancelado' %}
+                            <span class="text-danger">{{ pedido.pedido_status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
